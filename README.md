@@ -4,7 +4,7 @@ U-collect in-app payment SDK for android.
 ##Installation
 Add the bintray repository to your build file in your root build.gradle at the end of repositories:
 
-```
+```gradle
  allprojects {
         repositories {
             ...
@@ -15,7 +15,7 @@ Add the bintray repository to your build file in your root build.gradle at the e
 ```
 
 Add the dependencies
-```
+```gradle
  dependencies {
  compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:1.1.0@aar'
  compile 'com.android.support:cardview-v7:25.1.0'
