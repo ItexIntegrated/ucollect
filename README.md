@@ -37,7 +37,7 @@ To activate testing mode
 ```
 
 ###Building Transaction Request
-To start a transaction, Implement ITransactionCallback
+To start a transaction, Implement TransactionCallback
 ```java
  TransactionCallback transactionCallback = new TransactionCallback() {
      @Override
