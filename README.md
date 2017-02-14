@@ -29,7 +29,7 @@ Add the dependencies
  RequestManager requestManager = RequestManager.initialize(context,testMerchantId, testMerchantKey);
  
  ```
-###Mode
+###Test Mode
 To activate testing mode
  ```java
  requestManager.workingMode = RequestManager.MODE.DEBUG; // For  Test
