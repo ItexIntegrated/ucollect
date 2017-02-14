@@ -27,8 +27,35 @@ Add the dependencies
 ```java
  Context context  = getApplicationContext();
  RequestManager requestManager = RequestManager.initialize(context,testMerchantId, testMerchantKey);
+ 
+ ```
+###Mode
+To activate testing mode
+ ```java
  requestManager.workingMode = RequestManager.MODE.DEBUG; // For  Test
- Building Transaction Request
+ 
+```
+
+###Building Transaction Request
+To start a transaction, Implement ITransactionCallback
+```java
+ TransactionCallback transactionCallback = new TransactionCallback() {
+     @Override
+     public void onTransactionError(Exception e) {
+
+     }
+
+     @Override
+     public void onTransactionComplete(TransactionResult transactionResult) {
+
+     }
+
+     @Override
+     public void onRequestOtpAuthorization() {
+
+     }
+ };
+ 
  String date =  new SimpleDateFormat(RequestManager.UCOLLECT_DATE_FORMAT).format(new Date());
  requestManager.transactionDateTime = date;
 
@@ -58,28 +85,7 @@ Add the dependencies
 
  //Pin is optional - dependent on the card scheme
  requestManager.cardPin = getCardPin().getText().toString().trim();
-
-```
-
-###Building Transaction Request
-To start a transaction, Implement ITransactionCallback
-```java
- TransactionCallback transactionCallback = new TransactionCallback() {
-     @Override
-     public void onTransactionError(Exception e) {
-
-     }
-
-     @Override
-     public void onTransactionComplete(TransactionResult transactionResult) {
-
-     }
-
-     @Override
-     public void onRequestOtpAuthorization() {
-
-     }
- };
+ 
 
  requestManager.startPaymentTransaction(transactionCallback);
  ```
