@@ -1,7 +1,7 @@
 # ucollect-android
 U-collect in-app payment SDK for android.
 
-##Installation
+## Installation
 Add the bintray repository to your build file in your root build.gradle at the end of repositories:
 
 ```gradle
@@ -22,21 +22,21 @@ Add the dependencies
  }
  
  ```
-##Usage
-###Initialization
+## Usage
+### Initialization
 ```java
  Context context  = getApplicationContext();
  RequestManager requestManager = RequestManager.initialize(context,testMerchantId, testMerchantKey);
  
  ```
-###Test Mode
+### Test Mode
 To activate testing mode
  ```java
  requestManager.workingMode = RequestManager.MODE.DEBUG; // For  Test
  
 ```
 
-###Building Transaction Request
+### Building Transaction Request
 To start a transaction, Implement TransactionCallback
 ```java
  TransactionCallback transactionCallback = new TransactionCallback() {
@@ -91,7 +91,7 @@ To start a transaction, Implement TransactionCallback
  ```
 
 
-###Authorizing Transactions
+### Authorizing Transactions
 When a transaction needs to be authorized using OTP, implement the onRequestAuthorization, and call requestManager.authorizeTransaction(otp);
 
 ```java
@@ -126,7 +126,7 @@ When a transaction needs to be authorized using OTP, implement the onRequestAuth
  }
  ```
 
-###Querying Transaction Status
+### Querying Transaction Status
 To query the status of an on-going or already complete transaction
 ```java
 String merchantGeneratedReferenceNumber = "14811308291201"; // Previous Transaction's Merchant Generated Reference Number
