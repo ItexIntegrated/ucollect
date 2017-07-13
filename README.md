@@ -1,10 +1,10 @@
 # ucollect-android
 U-collect in-app payment SDK for android.
 
-##Installation
+## Installation
 Add the bintray repository to your build file in your root build.gradle at the end of repositories:
 
-```
+```gradle
  allprojects {
         repositories {
             ...
@@ -14,21 +14,50 @@ Add the bintray repository to your build file in your root build.gradle at the e
     
 ```
 
-Add the dependencies
-```
+ Add the dependencies
+```gradle
  dependencies {
- compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:1.1.0@aar'
+ compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:2.0.1@aar'
  compile 'com.android.support:cardview-v7:25.1.0'
  }
  
  ```
-##Usage
-###Initialization
-```java
+## Usage
+### Initialization
+ ```java
  Context context  = getApplicationContext();
  RequestManager requestManager = RequestManager.initialize(context,testMerchantId, testMerchantKey);
+ 
+ ```
+### Test Mode
+To activate testing mode
+ ```java
  requestManager.workingMode = RequestManager.MODE.DEBUG; // For  Test
- Building Transaction Request
+ 
+```
+
+### Building Transaction Request
+To start a transaction, Implement TransactionCallback
+```java
+ TransactionCallback transactionCallback = new TransactionCallback() {
+     @Override
+     public void onTransactionError(Exception e) {
+
+     }
+
+     @Override
+     public void onTransactionComplete(TransactionResult transactionResult) {
+        String title =  transactionResult.getStatus() == TransactionStatus.APPROVED ? "Transaction Successful": "Transaction Declined";
+        String message =  transactionResult.getResponseMessage();
+        showMessage(title, message);
+     }
+
+     @Override
+     public void onRequestOtpAuthorization() {
+
+     }
+ };
+ 
  String date =  new SimpleDateFormat(RequestManager.UCOLLECT_DATE_FORMAT).format(new Date());
  requestManager.transactionDateTime = date;
 
@@ -58,34 +87,13 @@ Add the dependencies
 
  //Pin is optional - dependent on the card scheme
  requestManager.cardPin = getCardPin().getText().toString().trim();
-
-```
-
-###Building Transaction Request
-To start a transaction, Implement ITransactionCallback
-```java
- TransactionCallback transactionCallback = new TransactionCallback() {
-     @Override
-     public void onTransactionError(Exception e) {
-
-     }
-
-     @Override
-     public void onTransactionComplete(TransactionResult transactionResult) {
-
-     }
-
-     @Override
-     public void onRequestOtpAuthorization() {
-
-     }
- };
+ 
 
  requestManager.startPaymentTransaction(transactionCallback);
  ```
 
 
-###Authorizing Transactions
+### Authorizing Transactions
 When a transaction needs to be authorized using OTP, implement the onRequestAuthorization, and call requestManager.authorizeTransaction(otp);
 
 ```java
@@ -120,7 +128,7 @@ When a transaction needs to be authorized using OTP, implement the onRequestAuth
  }
  ```
 
-###Querying Transaction Status
+### Querying Transaction Status
 To query the status of an on-going or already complete transaction
 ```java
 String merchantGeneratedReferenceNumber = "14811308291201"; // Previous Transaction's Merchant Generated Reference Number
