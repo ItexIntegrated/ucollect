@@ -1,5 +1,7 @@
 package com.iisysgroup.ucollect;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -41,6 +43,7 @@ final class CipgProcessor {
                 }
 
                 String responseString = processTransaction(url, content);
+//                Log.d("Ucollect", responseString);
                 String response = new JSONObject(responseString).getJSONObject("result").toString();
 
 
@@ -69,7 +72,7 @@ final class CipgProcessor {
                 }
 
                 String responseString = processTransaction(url, content);
-
+//                Log.d("Ucollect", responseString);
                 String response = new JSONObject(responseString).getJSONObject("result").toString();
 
                 Gson gson = new Gson();
@@ -98,7 +101,7 @@ final class CipgProcessor {
                 }
 
                 String responseString = processTransaction(url, content);
-
+//                Log.d("Ucollect", responseString);
                 String response = new JSONObject(responseString).getJSONObject("result").toString();
 
                 Gson gson = new Gson();

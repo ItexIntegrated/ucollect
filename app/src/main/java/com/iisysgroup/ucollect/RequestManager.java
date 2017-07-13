@@ -3,6 +3,7 @@ package com.iisysgroup.ucollect;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -94,7 +95,6 @@ public final class RequestManager {
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("merchantId", merchantID);
-
         jsonObject.put("description", Utility.urlEncode(purchaseDescription));
         jsonObject.put("total", totalPurchaseAmount);
         jsonObject.put("date", transactionDateTime);
@@ -145,7 +145,7 @@ public final class RequestManager {
             @Override
             public Void then(Task<Status> task) throws Exception {
                 Status status = task.getResult();
-
+               // Log.d("Ucollect", status.toString());
 
                 if (status.getStatus().equals("000")) {
                     queryTransactionStatus();
@@ -307,6 +307,11 @@ public final class RequestManager {
 
         String getOrderID() {
             return OrderID;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s %s %s %s", Status, Message, Type, OrderID);
         }
     }
 }

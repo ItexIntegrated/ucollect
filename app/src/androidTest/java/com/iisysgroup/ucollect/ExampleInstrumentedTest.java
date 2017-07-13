@@ -3,6 +3,7 @@ package com.iisysgroup.ucollect;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.iisysgroup.ucollect_android", appContext.getPackageName());
+        assertEquals("com.iisysgroup.ucollect", appContext.getPackageName());
     }
 
 
@@ -65,6 +66,7 @@ public class ExampleInstrumentedTest {
         String requestString = null;
         try {
             requestString =  requestManager.buildTransactionRequest();
+            Log.d("Ucollect Test",requestString);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -80,7 +82,7 @@ public class ExampleInstrumentedTest {
             e.printStackTrace();
         }
 
-        System.out.println(response);
+        Log.d("Ucollect Test",response);
         assertTrue(response != null);
     }
 }

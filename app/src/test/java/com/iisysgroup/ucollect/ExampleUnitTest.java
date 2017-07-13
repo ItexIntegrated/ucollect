@@ -63,8 +63,9 @@ public class ExampleUnitTest {
             e.printStackTrace();
 
         }
-        assertTrue( requestString != null);
         System.out.println(requestString);
+        assertTrue( requestString != null);
+
 //        String url = "https://databaseendsrv.cloudapp.net/cipg-payportal/regdtran";
 //
 //        String response = null;

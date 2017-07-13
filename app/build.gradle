@@ -1,4 +1,5 @@
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'com.jfrog.bintray'
 
 
@@ -18,7 +19,7 @@ bintray {
         version {
             name = '1.1.0'
             desc = 'U-collect Android SDK 1.1.0'
-            released  = new Date()
+            released = new Date()
             vcsTag = '1.1.0'
 
             gpg {
@@ -88,14 +89,33 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:cardview-v7:25.1.0'
+
+    androidTestCompile ('com.android.support.test:runner:0.5', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // Set this dependency to use JUnit 4 rules
+    androidTestCompile ('com.android.support.test:rules:0.5', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+
+
     compile files('libs/bolts-tasks-1.4.0.jar')
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/okhttp-3.6.0.jar')
     compile files('libs/okio-1.11.0.jar')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+
+
+
 }
