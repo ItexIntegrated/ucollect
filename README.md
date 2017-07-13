@@ -14,17 +14,17 @@ Add the bintray repository to your build file in your root build.gradle at the e
     
 ```
 
-Add the dependencies
+ Add the dependencies
 ```gradle
  dependencies {
- compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:1.1.0@aar'
+ compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:2.0.1@aar'
  compile 'com.android.support:cardview-v7:25.1.0'
  }
  
  ```
 ## Usage
 ### Initialization
-```java
+ ```java
  Context context  = getApplicationContext();
  RequestManager requestManager = RequestManager.initialize(context,testMerchantId, testMerchantKey);
  
@@ -47,7 +47,9 @@ To start a transaction, Implement TransactionCallback
 
      @Override
      public void onTransactionComplete(TransactionResult transactionResult) {
-
+        String title =  transactionResult.getStatus() == TransactionStatus.APPROVED ? "Transaction Successful": "Transaction Declined";
+        String message =  transactionResult.getResponseMessage();
+        showMessage(title, message);
      }
 
      @Override
