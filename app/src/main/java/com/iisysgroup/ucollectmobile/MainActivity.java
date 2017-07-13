@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.iisysgroup.ucollect.TransactionCallback;
 import com.iisysgroup.ucollect.RequestManager;
 import com.iisysgroup.ucollect.TransactionResult;
+import com.iisysgroup.ucollect.TransactionStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity  implements TransactionCallb
 
         //Payment Info
         requestManager.countryCurrencyCode = "566";
-        requestManager.totalPurchaseAmount = 50000.0;
+        requestManager.totalPurchaseAmount = 50.0;
         requestManager.numberOfItems = 5;
         requestManager.purchaseDescription = "Buns Purchase";
         requestManager.merchantGeneratedReferenceNumber = System.currentTimeMillis()+"";
@@ -117,15 +118,17 @@ public class MainActivity extends AppCompatActivity  implements TransactionCallb
         requestManager.cardHolderName = getCardHolderName().getText().toString().trim();//        requestManager.cardHolderName = "Account Name";
 
         //Pin is optional - dependent on the card scheme
-        requestManager.cardPin = getCardPin().getText().toString().trim();//        requestManager.cardPin = "1111";
+        String pin = getCardPin().getText().toString().trim();
+        if(!pin.isEmpty())
+            requestManager.cardPin = getCardPin().getText().toString().trim();//        requestManager.cardPin = "1111";
 
 
 
-//        requestManager.cardPan = ("4999082100029373");
-//        requestManager.cardCVV = ("518");
-//        requestManager.cardExpiryMonth = (11);
-//        requestManager.cardExpiryYear = (2019);
-//        requestManager.cardHolderName = ("Test Tester");
+        requestManager.cardPan = ("4999082100029373");
+        requestManager.cardCVV = ("518");
+        requestManager.cardExpiryMonth = (11);
+        requestManager.cardExpiryYear = (2019);
+        requestManager.cardHolderName = ("Test Tester");
 //        requestManager.cardPin = ("1234");
 //
 //        requestManager.cardPan = ("5061020000000002298");
@@ -163,8 +166,8 @@ public class MainActivity extends AppCompatActivity  implements TransactionCallb
     @Override
     public void onTransactionComplete(TransactionResult transactionResult ) {
         progressDialog.dismiss();
-        String title =  Integer.parseInt(transactionResult.Status) == 0 ? "Transaction Successful": "Transaction Declined";
-        String message =  transactionResult.Message;
+        String title =  transactionResult.getStatus() == TransactionStatus.APPROVED ? "Transaction Successful": "Transaction Declined";
+        String message =  transactionResult.getResponseMessage();
         showMessage(title, message);
     }
 

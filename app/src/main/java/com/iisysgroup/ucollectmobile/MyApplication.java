@@ -15,7 +15,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        testMerchantId = "CMNGN10381";
+        testMerchantKey = "e17fde60-b24f-4fc5-b8ad-c8ba261f2fda".trim();
+
         requestManager = RequestManager.initialize(this,testMerchantId, testMerchantKey);
-        requestManager.workingMode = RequestManager.MODE.DEBUG;
+//        requestManager.workingMode = RequestManager.MODE.DEBUG;
     }
 }
