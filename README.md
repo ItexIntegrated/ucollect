@@ -17,8 +17,12 @@ Add the bintray repository to your build file in your root build.gradle at the e
  Add the dependencies
 ```gradle
  dependencies {
- compile 'com.iisysgroup.ucollectmobilelib:ucollect-android:2.0.1@aar'
- compile 'com.android.support:cardview-v7:25.1.0'
+	//Required to use the ucollect-android library
+    implementation 'com.iisysgroup.ucollectmobilelib:ucollect-android:2.1.0@aar'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
  }
  
  ```
