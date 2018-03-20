@@ -1,14 +1,12 @@
 package com.iisysgroup.ucollect;
 
-import android.content.Context;
-import android.util.Log;
-
 import org.junit.Test;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.*;
 
 /**
@@ -18,21 +16,20 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
 
+    static String testMerchantId = "cipgubatest", testMerchantKey = "b4a4808d-9f36-4404-8ffb-f4fb4952dcbc".trim();
+
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
 
-    static String testMerchantId = "cipgubatest", testMerchantKey = "b4a4808d-9f36-4404-8ffb-f4fb4952dcbc".trim();
-
-
     @Test
-    public void testNetworkCall(){
-        RequestManager requestManager =  RequestManager.initialize(null, testMerchantId, testMerchantKey);
+    public void testNetworkCall() {
+        RequestManager requestManager = RequestManager.initialize(null, testMerchantId, testMerchantKey);
 
         requestManager.workingMode = RequestManager.MODE.DEBUG;
 
-        String date =  new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(new Date());
+        String date = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(new Date());
         requestManager.transactionDateTime = date;
 
         //Customer Info
@@ -46,7 +43,7 @@ public class ExampleUnitTest {
         requestManager.totalPurchaseAmount = 50000.0;
         requestManager.numberOfItems = 5;
         requestManager.purchaseDescription = "Buns Purchase";
-        requestManager.merchantGeneratedReferenceNumber = System.currentTimeMillis()+"";
+        requestManager.merchantGeneratedReferenceNumber = System.currentTimeMillis() + "";
 
         //Card Info
         requestManager.cardPan = ("4999082100029373");
@@ -58,13 +55,13 @@ public class ExampleUnitTest {
 
         String requestString = null;
         try {
-            requestString =  requestManager.buildTransactionRequest();
+            requestString = requestManager.buildTransactionRequest();
         } catch (Exception e) {
             e.printStackTrace();
 
         }
         System.out.println(requestString);
-        assertTrue( requestString != null);
+        assertTrue(requestString != null);
 
 //        String url = "https://databaseendsrv.cloudapp.net/cipg-payportal/regdtran";
 //

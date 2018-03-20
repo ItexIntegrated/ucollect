@@ -1,8 +1,7 @@
 package com.iisysgroup.ucollect;
 
 
-public interface TransactionCallback extends ResultCallback{
-
+public interface TransactionCallback extends ResultCallback {
 
 
     /**

@@ -19,8 +19,8 @@ public final class TransactionResult {
     }
 
 
-    public TransactionStatus getStatus(){
-        return Status.equals("000")? TransactionStatus.APPROVED : TransactionStatus.DECLINED;
+    public TransactionStatus getStatus() {
+        return Status.equals("000") ? TransactionStatus.APPROVED : TransactionStatus.DECLINED;
     }
 
 

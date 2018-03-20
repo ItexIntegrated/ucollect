@@ -1,18 +1,16 @@
 package com.iisysgroup.ucollect;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -34,12 +32,12 @@ public class ExampleInstrumentedTest {
 
 
     @Test
-    public void testNetworkCall(){
-        RequestManager requestManager =  RequestManager.initialize(null, testMerchantId, testMerchantKey);
+    public void testNetworkCall() {
+        RequestManager requestManager = RequestManager.initialize(null, testMerchantId, testMerchantKey);
 
         requestManager.workingMode = RequestManager.MODE.DEBUG;
 
-        String date =  new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(new Date());
+        String date = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(new Date());
         requestManager.transactionDateTime = date;
 
         //Customer Info
@@ -53,7 +51,7 @@ public class ExampleInstrumentedTest {
         requestManager.totalPurchaseAmount = 50000.0;
         requestManager.numberOfItems = 5;
         requestManager.purchaseDescription = "Buns Purchase";
-        requestManager.merchantGeneratedReferenceNumber = System.currentTimeMillis()+"";
+        requestManager.merchantGeneratedReferenceNumber = System.currentTimeMillis() + "";
 
         //Card Info
         requestManager.cardPan = ("4999082100029373");
@@ -65,13 +63,13 @@ public class ExampleInstrumentedTest {
 
         String requestString = null;
         try {
-            requestString =  requestManager.buildTransactionRequest();
-            Log.d("Ucollect Test",requestString);
+            requestString = requestManager.buildTransactionRequest();
+            Log.d("Ucollect Test", requestString);
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-        assertTrue( requestString != null);
+        assertTrue(requestString != null);
         System.out.println(requestString);
         String url = "https://databaseendsrv.cloudapp.net/cipg-payportal/regdtran";
 
@@ -82,7 +80,7 @@ public class ExampleInstrumentedTest {
             e.printStackTrace();
         }
 
-        Log.d("Ucollect Test",response);
+        Log.d("Ucollect Test", response);
         assertTrue(response != null);
     }
 }

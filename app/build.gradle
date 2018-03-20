@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.android.application'
 apply plugin: 'com.jfrog.bintray'
 
 
@@ -17,10 +16,10 @@ bintray {
         publications = ['MyPublication']
 
         version {
-            name = '2.0.1'
-            desc = 'U-collect Android SDK 2.0.1'
+            name = '2.1.2'
+            desc = 'U-collect Android SDK 2.1.2'
             released = new Date()
-            vcsTag = '2.0.1'
+            vcsTag = '2.1.2'
 
             gpg {
                 sign = true //Determines whether to GPG sign the files. The default is false
@@ -43,38 +42,36 @@ def pomConfig = {
         developer {
             id "ItexIntegrated"
             name "Itex Integrated Systems Ltd"
-            email "itexintegratedservices@gmail.com"
+            email "developers@iisysgroup.com"
         }
     }
 }
 
-publishing {
-    publications {
-        MyPublication(MavenPublication) {
-            groupId 'com.iisysgroup.ucollectmobilelib'
-            artifactId 'ucollect-android'
-            version '2.0.1'
+publishing.publications {
+    MyPublication(MavenPublication) {
+        groupId 'com.iisysgroup.ucollectmobilelib'
+        artifactId 'ucollect-android'
+        version '2.1.2'
 //            artifact(sourceJar)
-            artifact("$buildDir/outputs/aar/app-release.aar")
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('description', 'U-collect Android SDK')
-                root.appendNode('name', 'ucollect-android')
-                root.appendNode('url', 'https://github.com/ItexIntegrated/ucollect')
-                root.children().last() + pomConfig
-            }
+        artifact("$buildDir/outputs/aar/app-release.aar")
+        pom.withXml {
+            def root = asNode()
+            root.appendNode('description', 'U-collect Android SDK')
+            root.appendNode('name', 'ucollect-android')
+            root.appendNode('url', 'https://github.com/ItexIntegrated/ucollect')
+            root.children().last() + pomConfig
         }
     }
 }
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
     defaultConfig {
 
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -88,35 +85,25 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-
-    androidTestCompile ('com.android.support.test:runner:0.5', {
+    androidTestCompile('com.android.support.test:runner:0.5', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // Set this dependency to use JUnit 4 rules
-    androidTestCompile ('com.android.support.test:rules:0.5', {
+    androidTestCompile('com.android.support.test:rules:0.5', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
 
-
-
-    compile files('libs/bolts-tasks-1.4.0.jar')
-    compile files('libs/gson-2.3.1.jar')
-    compile files('libs/okhttp-3.6.0.jar')
-    compile files('libs/okio-1.11.0.jar')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-
-
-
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.parse.bolts:bolts-tasks:1.4.0'
 
     //To update library, update the version codes and then run "gradlew bintrayUpload" in  the root of the project on terminal
-
 }

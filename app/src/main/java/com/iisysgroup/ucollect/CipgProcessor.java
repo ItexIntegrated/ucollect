@@ -1,7 +1,5 @@
 package com.iisysgroup.ucollect;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -26,6 +24,9 @@ import okhttp3.Response;
  */
 
 final class CipgProcessor {
+
+    public static final MediaType JSON
+            = MediaType.parse("application/json; charset=utf-8");
 
     static Task<RequestManager.Status> initiateTransaction() {
         final RequestManager requestManager = RequestManager.getInstance();
@@ -108,37 +109,32 @@ final class CipgProcessor {
                 RequestManager.Status status = gson.fromJson(response, RequestManager.Status.class);
 
 
-
                 return status;
             }
         });
     }
 
-
-    public static final MediaType JSON
-            = MediaType.parse("application/json; charset=utf-8");
-
     public static String processTransaction(final String urlString, final String requestString) throws MalformedURLException {
 
-        OkHttpClient.Builder builder =  new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS);
 
-         if( RequestManager.getInstance().workingMode == RequestManager.MODE.DEBUG) {
-             builder.hostnameVerifier(new HostnameVerifier() {
-                 @Override
-                 public boolean verify(String hostname, SSLSession session) {
-                   //  System.out.println("Hostname: " + hostname);
-                     return true;
-                 }
-             });
-         }
+        if (RequestManager.getInstance().workingMode == RequestManager.MODE.DEBUG) {
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    //  System.out.println("Hostname: " + hostname);
+                    return true;
+                }
+            });
+        }
 
-       OkHttpClient okHttpClient =   builder.build();
+        OkHttpClient okHttpClient = builder.build();
 
-        RequestBody  requestBody = RequestBody.create(JSON,  requestString);
+        RequestBody requestBody = RequestBody.create(JSON, requestString);
 
-        Request request =  new Request.Builder()
+        Request request = new Request.Builder()
                 .url(urlString)
                 .addHeader("Content-Type", "text/json")
                 .post(requestBody)
@@ -146,7 +142,7 @@ final class CipgProcessor {
 
 
         try {
-            Response response =  okHttpClient.newCall(request).execute();
+            Response response = okHttpClient.newCall(request).execute();
             return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,7 +3,6 @@ package com.iisysgroup.ucollect;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -145,7 +144,7 @@ public final class RequestManager {
             @Override
             public Void then(Task<Status> task) throws Exception {
                 Status status = task.getResult();
-               // Log.d("Ucollect", status.toString());
+                // Log.d("Ucollect", status.toString());
 
                 if (status.getStatus().equals("000")) {
                     queryTransactionStatus();
@@ -267,7 +266,6 @@ public final class RequestManager {
 
 
     public enum MODE {DEBUG, LIVE}
-
 
 
     static class Status {
