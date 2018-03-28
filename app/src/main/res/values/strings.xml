@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">UCollect</string>
-    <string name="cipg_test_url">https://databaseendsrv.cloudapp.net/cipg-payportal/regdtran</string>
+    <string name="cipg_test_url">http://databaseendsrv.cloudapp.net/cipg-payportal/regdtran</string>
     <string name="cipg_live_url">https://ucollect.ubagroup.com/cipg-payportal/regdtran</string>
 
-    <string name="cipg_test_status_url">https://databaseendsrv.cloudapp.net/cipg-payportal/fetchdtran</string>
+    <string name="cipg_test_status_url">http://databaseendsrv.cloudapp.net/cipg-payportal/fetchdtran</string>
     <string name="cipg_live_status_url">https://ucollect.ubagroup.com/cipg-payportal/fetchdtran</string>
 
-    <string name="cipg_test_otp_url">https://databaseendsrv.cloudapp.net/cipg-payportal/sendotp</string>
+    <string name="cipg_test_otp_url">http://databaseendsrv.cloudapp.net/cipg-payportal/sendotp</string>
     <string name="cipg_live_otp_url">https://ucollect.ubagroup.com/cipg-payportal/sendotp</string>
 </resources>
