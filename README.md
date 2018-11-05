@@ -1,5 +1,35 @@
 #UCOLLECT TRANSACTION ON KOTLIN
 
+## Installation
+Add the bintray repository to your build file in your root build.gradle at the end of repositories:
+
+```gradle
+ allprojects {
+        repositories {
+            ...
+            maven { url 'https://dl.bintray.com/itex/U-collect/' }
+        }
+    } 
+    
+```
+
+ Add the dependencies
+```gradle
+ dependencies {
+	//Required to use the ucollect-android library
+    implementation 'com.iisysgroup.ucollectmobilelib:ucollect-android:2.1.3@aar'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+	implementation 'com.parse.bolts:bolts-tasks:1.4.0'
+ }
+ 
+ ```
+## Usage
+
+
+
 1. Set up a merchant ID and service Key into the `UCollectAuth` class and setup  transaction details into `UCollectDetails` class
 
        `val uCollectAuth = PaymentsManager.UCollectAuth(merchantId = "", serviceKey = "", isLive = true)
