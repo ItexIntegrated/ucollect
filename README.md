@@ -33,7 +33,7 @@ Add the bintray repository to your build file in your root build.gradle at the e
 1. Set up a merchant ID and service Key into the `UCollectAuth` class and setup  transaction details into `UCollectDetails` class
 
        `val uCollectAuth = PaymentsManager.UCollectAuth(merchantId = "", serviceKey = "", isLive = true)
-       val uCollectDetails = PaymentsManager.UCollectDetails(2.5, "Trial", "Second trial", "trial@trial.com", "09079078540", currencyCode = "566", description = "This is a sample description")`
+       val uCollectDetails = PaymentsManager.UCollectDetails(2.5, "Trial", "John Doe", "test@email.com", "09012345789", currencyCode = "566", description = "This is a sample description")`
 
    
 2. Call the startTrasaction and trasaction will begin.
